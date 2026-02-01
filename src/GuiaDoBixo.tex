@@ -15,7 +15,7 @@
 \usepackage[pdfborder={0 0 0}]{hyperref}
 \usepackage{wrapfig} % Para o qrcode do editorial
 \usepackage[labelformat=empty]{caption} % Para tirar o "Figure:" da caption do QRCode
-
+\usepackage{datatool} % Para tabela do editorial, permite ordenar os nomes em ordem alfabética
 %\usepackage{showframe} %Para mostrar o frame do arquivo
 
 \newcounter{qcounter}
@@ -53,6 +53,7 @@
 % Veja a primeira linha de editorial.tex para entender melhor.
 % Delimita o editorial (que não entra no Índice):
 \newenvironment{editorial}[1] {
+    \thispagestyle{empty}
     \framebox[\textwidth] {
         \rule[-1.2ex]{5ex}{5.5ex}
         {\Large\sf #1}
@@ -64,6 +65,12 @@
 }{
 \thispagestyle{empty}
 \pagebreak
+}
+
+% Adiciona um nome a tabela de colaboradores do editorial
+\newcommand{\addcolaborador}[1]{%
+  \DTLnewrow{colaboradores}%
+  \DTLnewdbentry{colaboradores}{nome}{#1}%
 }
 
 
