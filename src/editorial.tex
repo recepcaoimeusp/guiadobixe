@@ -31,7 +31,7 @@ apenas em ``bixes'' e ``veteranes''.
 \rule{\textwidth}{0.5ex}\rule{2ex}{0.5ex}
 
 %REFTIME
-{\large\bf Guia de Bixe 2025} \\
+{\large\bf Guia de Bixe 2026} \\
 Uma publicação da Comissão de Recepção
 
 
@@ -79,5 +79,67 @@ California, 94041, USA.
     \centering
     \includegraphics{img/cc/by-sa.png}
 \end{figure}
+
+\newpage
+
+{\large\bf Colaboradores 2026} \\
+Quem ajudou na construção do guia esse ano
+
+% Criando o banco de dados
+\DTLnewdb{colaboradores}
+
+\addcolaborador{Lucas Escobar}
+\addcolaborador{Letícia Moribe}
+\addcolaborador{Mariana Yumi}
+\addcolaborador{Thalia}
+\addcolaborador{Ana Beatriz Ferreira}
+\addcolaborador{Arthur Sampaio}
+\addcolaborador{Carol Hara}
+\addcolaborador{Cindy Hanna}
+\addcolaborador{Clayton Rodrigues}
+\addcolaborador{Davi Sperandio}
+\addcolaborador{Eduardo Yukio}
+\addcolaborador{Gabriel Ferreira}
+\addcolaborador{Gabriel Graciano}
+\addcolaborador{Gustavo Katsuo}
+\addcolaborador{Henrique Rouvier}
+\addcolaborador{Lucas Rabaquim}
+\addcolaborador{Lucas Joia}
+\addcolaborador{Lucas Antônio}
+\addcolaborador{Lucas Toshioka}
+\addcolaborador{Manuella Arenas}
+\addcolaborador{Miguel Francisco}
+\addcolaborador{Pedro Ribeiro}
+\addcolaborador{Raissa Mendes}
+\addcolaborador{Guilherme Rinaldi}
+
+% Ordenação automática
+\DTLsort{nome}{colaboradores}
+
+% Construção da tabela (lógica para evitar o erro de 'alignment tab')
+\newcounter{colcount}
+\newcommand{\corpoTabela}{} % Variável que vai guardar o texto da tabela
+
+\DTLforeach*{colaboradores}{\Nome=nome}{%
+    \stepcounter{colcount}%
+    % Adiciona o nome à variável
+    \xappto\corpoTabela{\Nome}% 
+    \ifnum\value{colcount}=3
+        \gappto\corpoTabela{\\}% Se for o 3º, quebra a linha
+        \setcounter{colcount}{0}%
+    \else
+        \gappto\corpoTabela{&}% Se não, coloca o separador de coluna
+    \fi
+}
+
+{
+\renewcommand{\arraystretch}{1.4}% Controla o espaçamento verical entre os nomes
+
+\begin{center}
+    \begin{tabular}{llll} % 3 colunas
+        \corpoTabela % Aqui o LaTeX apenas imprime o que foi montado acima
+    \end{tabular}
+\end{center}
+}
 
 \end{editorial}
